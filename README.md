@@ -1,15 +1,11 @@
-# early-fault-detection
-Early fault detection during production
+# Pyro4 Interfacing Boilerplate
+Boilerplate code for interfacing LinkSmart IoT Agent with a Python object using [Pyro4](https://pythonhosted.org/Pyro4)
 
 ## Components
 * *data-processing-agent:*
 Configuration for [IoT Learning Agent](https://linksmart.eu/redmine/projects/iot-data-processing-agent)
-* *plm_connector:*
-Connector to [Siemens PLM Software](https://www.plm.automation.siemens.com/en/)
 * *pyro-ns:*
 [Pyro4 Nameserver](https://pythonhosted.org/Pyro4/nameserver.html) docker image
-* *simulation_model:*
-PLM Simulation Model files
 * *training:*
 Machine learning module
 

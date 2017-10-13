@@ -4,13 +4,6 @@ services:
     image: eclipse-mosquitto
     ports:
      - 1883:1883
-  plm_connector:
-    build: plm_connector
-    links:
-     - mosquitto
-    volumes:
-     - ./plm_connector/config:/config
-    command: ["-c", "/config/config.json"]
   pyro-ns:
     image: farshidtz/pyro4-ns
     # ports:
@@ -40,7 +33,7 @@ services:
      - cep_init_engines=eu.linksmart.services.event.cep.engines.EsperEngine
      - agent_init_extensions=eu.linksmart.services.event.ceml.core.CEML
      - connection_broker_mqtt_hostname=mosquitto
-     - ceml_init_bootstrapping=/config/generated_bootstrapping.json
+     - ceml_init_bootstrapping=/config/statement.json
      - api_events_mqtt_topic_incoming_SenML=SMTLine/#
      - api_rest_enabled=true
      - DEBUG=0

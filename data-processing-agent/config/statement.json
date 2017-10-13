@@ -1,5 +1,5 @@
   {
-    "Name": "PRODUCT_TYPE",
+    "Name": "Dummy",
     "Descriptors": [
       {
         "Name": "measurements",
@@ -55,8 +55,7 @@
             "max_depth": 90,
             "n_jobs": 4
           },
-          "dir": "/model/",
-          "production_layout": {}
+          "dir": "/model/"
         }
       }
     },
