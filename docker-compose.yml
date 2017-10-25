@@ -6,8 +6,7 @@ services:
      - 1883:1883
   pyro-ns:
     image: farshidtz/pyro4-ns
-    # ports:
-    #  - "9090-9091:9090-9091"
+    # ports: ["9090-9091:9090-9091"]
     command: ["--host=pyro-ns"]
   python-agent:
     build: training
@@ -15,8 +14,7 @@ services:
      - pyro-ns
     volumes:
      - ./training/model:/model
-    # ports:
-    #  - "9100:9100"
+    # ports: ["9100:9100"]
     command: ["--bname=Agent", "--bpath=agent/agent.py", "--rname=python-agent-0", "--host=python-agent", "--port=9100", "--ns"]
   dpa:
     build: data-processing-agent
@@ -37,6 +35,5 @@ services:
      - api_events_mqtt_topic_incoming_SenML=SMTLine/#
      - api_rest_enabled=true
      - DEBUG=0
-    entrypoint: bash -c "dockerize 
-      -wait tcp://python-agent:9100 &&
+    entrypoint: bash -c "dockerize -wait tcp://python-agent:9100 &&
       java -cp ./*:/dependencies/* org.springframework.boot.loader.PropertiesLauncher"

@@ -1,4 +1,4 @@
-FROM fraunhoferfit/ls-la
+FROM docker.linksmart.eu/agent:la
 
 RUN apk add --no-cache openssl bash
 
