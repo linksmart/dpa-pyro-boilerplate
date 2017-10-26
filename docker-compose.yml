@@ -13,7 +13,7 @@ services:
     depends_on:
      - pyro-ns
     volumes:
-     - D:\workspaces\borrame\pyro-boilerplate\training\model:/model
+     - ./training/model:/model
     # ports: ["9100:9100"]
     command: ["--bname=Agent", "--bpath=agent/agent.py", "--rname=python-agent-0", "--host=python-agent", "--port=9100", "--ns"]
   dpa:
@@ -23,7 +23,7 @@ services:
      - python-agent
      - mosquitto
     volumes:
-     - D:\workspaces\borrame\pyro-boilerplate\data-processing-agent\config:/config
+     - ./data-processing-agent/config:/config
     ports:
      - "8319:8319"
     environment:
