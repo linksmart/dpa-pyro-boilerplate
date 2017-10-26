@@ -1,4 +1,4 @@
-  {
+[  {
     "Name": "Dummy",
     "Descriptors": [
       {
@@ -81,3 +81,4 @@
       "AlwaysDeploy": true
     }
   }
+]
