@@ -5,7 +5,8 @@ services:
     ports:
      - 1883:1883
   pyro-ns:
-    image: farshidtz/pyro4-ns
+    build: pyro-ns
+    # image: farshidtz/pyro4-ns
     # ports: ["9090-9091:9090-9091"]
     command: ["--host=pyro-ns"]
   python-agent:
