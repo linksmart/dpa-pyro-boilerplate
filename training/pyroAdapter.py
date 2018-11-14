@@ -3,7 +3,7 @@
  PyroAdapter exposes an external learning module via Pyro4
 """
 import Pyro4
-import sys, imp, os, logging
+import sys, imp, importlib, os, logging
 from optparse import OptionParser
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s: %(message)s', level=logging.DEBUG)
@@ -13,11 +13,31 @@ class PyroAdapter(object):
     def __init__(self):
         logger.info("Initializing Pyro object.")
         # TODO: move this to build(...) to support different backends on one pyro server
+        if sys.version_info.major < 3:
+            try:
+                module = imp.load_source(OPTIONS.bname, OPTIONS.bpath)
+                self.backend = getattr(module, OPTIONS.bname)()
+            except Exception as e:
+                logger.error(e)
+        else:
+            myclass = PyroAdapter.dynamic_importer(OPTIONS.bpath,OPTIONS.bname)
+            self.backend = myclass
+
+    def dynamic_importer(name, class_name):
+        """
+        Dynamically imports modules / classes
+        """
+
         try:
-            module = imp.load_source(OPTIONS.bname, OPTIONS.bpath)
-            self.backend = getattr(module, OPTIONS.bname)()
+            spec = importlib.util.spec_from_file_location(OPTIONS.bname, name)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+
         except Exception as e:
-            logger.error(e)
+            print(e)
+
+        myclass=getattr(module,OPTIONS.bname)
+        return myclass()
 
     @Pyro4.expose
     def build(self, classifier):
